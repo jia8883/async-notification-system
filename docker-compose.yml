@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: notification-postgres
+    environment:
+      POSTGRES_DB: notification_db
+      POSTGRES_USER: notification_user
+      POSTGRES_PASSWORD: notification_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U notification_user -d notification_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 테스트용 별도 DB (선택)
+  postgres-test:
+    image: postgres:16
+    container_name: notification-postgres-test
+    environment:
+      POSTGRES_DB: notification_test_db
+      POSTGRES_USER: notification_user
+      POSTGRES_PASSWORD: notification_pass
+    ports:
+      - "5433:5432"
+    tmpfs:
+      - /var/lib/postgresql/data    # 테스트 DB는 메모리에만 유지 (빠른 초기화)
+
+volumes:
+  postgres-data:
