@@ -27,6 +27,12 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: false    # 최초 실행 시 baseline 불필요 (신규 DB)
 
+notification:
+  recovery:
+    # PROCESSING 상태가 이 시간(분) 이상 지속되면 stale로 판단해 복구.
+    # Worker의 최대 처리 시간(ex. 외부 API 타임아웃)보다 충분히 크게 설정.
+    stale-threshold-minutes: 5
+
 ---
 
 # 로컬 개발용 프로파일
