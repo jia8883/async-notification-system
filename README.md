@@ -117,8 +117,9 @@ PostgreSQL의 다음 기능을 활용했습니다.
 
 ### 상태 전이
 
-![flow](./img/flow.png)
-
+<p align="center">
+  <img src="./img/flow.png" width="75%"/>
+</p>
 
 읽음 여부는 별도 `is_read` 컬럼으로 관리해 `SUCCESS + UNREAD`, `SUCCESS + READ` 상태를 자연스럽게 표현합니다.
 
